@@ -522,6 +522,8 @@ abstract class Application extends Module implements Initiable
 
             $this->state = self::STATE_END;
 
+            $this->flushLogger();
+
             return $this->response->exitStatus;
         } catch (ExitException $e) {
             $this->end($e->statusCode, $this->response ?? null);
@@ -618,6 +620,8 @@ abstract class Application extends Module implements Initiable
         if (YII_ENV_TEST) {
             throw new ExitException($status);
         }
+
+        $this->flushLogger();
 
         exit($status);
     }
@@ -780,6 +784,17 @@ abstract class Application extends Module implements Initiable
             } elseif ($pos === false) {
                 unset($this->aliases[$root]);
             }
+        }
+    }
+
+    /**
+     * Attempts to flush logger messages.
+     * @since 3.0.0
+     */
+    protected function flushLogger()
+    {
+        if ($this->logger instanceof \yii\log\Logger) {
+            $this->logger->flush(true);
         }
     }
 }
