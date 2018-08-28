@@ -4,6 +4,7 @@ Yii Framework 2 Change Log
 3.0.0 under development
 -----------------------
 
+- Bug : Logger is not flushed at the end of the request (pgaultier)
 - Bug #12895: Use custom error action when provided, regardless of the response format (erikverheij)
 - Enh #16285: Modified yii\web\XmlResponseFormatter to accept attributes for XML elements (codespede)
 - Bug #16327: Fix getComposer() yii\BaseYii::createObject(null) BaseMailer (cjtterabyte)
